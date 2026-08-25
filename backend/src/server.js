@@ -1,12 +1,15 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
+import helmet from "helmet";
 import { PORT, FRONTEND_URL } from "./config/env.js";
 import routes from "./routes/index.js";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 
 const app = express();
 
+app.set("trust proxy", 1);
+app.use(helmet());
 app.use(cors({
   origin: [FRONTEND_URL, "https://cuentascontrol.vercel.app", "https://frontend-ten-ashen-38.vercel.app", "http://192.168.80.18:5173", "http://192.168.80.18:3001"],
   credentials: true,
